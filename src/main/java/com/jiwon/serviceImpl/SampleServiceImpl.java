@@ -12,5 +12,6 @@ public class SampleServiceImpl implements SampleService {
         log.info("jenkins test");
         log.info("jenkins build test ");
         log.info("jenkins build test - 2");
+        log.info("jenkins build test - 3");
     }
 }
