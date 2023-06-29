@@ -16,6 +16,7 @@ public class SampleController {
 
     @GetMapping("/test")
     public String test(){
+        sampleService.serviceTest();
         return "/test.html";
     }
 }
