@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 public class SampleServiceImpl implements SampleService {
     @Override
     public void serviceTest() {
-        log.info("asdfs");
+        log.info("jenkins test");
     }
 }
