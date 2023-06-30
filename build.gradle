@@ -29,9 +29,6 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.apache.logging.log4j:log4j-core:2.16.0'
-	testImplementation 'org.apache.logging.log4j:log4j-api:2.16.0'
-	testImplementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.16.0'
 
 	//Log4j2
 	testCompileOnly 'org.projectlombok:lombok'
