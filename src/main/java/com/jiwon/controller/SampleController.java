@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class SampleController {
 
-    @Autowired
-    private SampleService sampleService;
+    private final SampleService sampleService;
 
     @GetMapping("/test")
     public String test(){
