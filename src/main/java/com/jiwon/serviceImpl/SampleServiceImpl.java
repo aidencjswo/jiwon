@@ -10,11 +10,6 @@ public class SampleServiceImpl implements SampleService {
     @Override
     public void serviceTest() {
         log.info("jenkins test");
-        log.info("jenkins build test ");
-        log.info("jenkins build test - 2");
-        log.info("jenkins build test - 3");
-        log.info("jenkins build test - 4");
-        log.info("jenkins clone test");
-        log.info("jenkins clone test2");
+
     }
 }
