@@ -14,3 +14,8 @@ spring:
 logging:
   level:
     org.springframework: info
+
+com:
+  jiwon:
+    jwt:
+      secret: hello123456789
