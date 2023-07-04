@@ -11,16 +11,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.stream.IntStream;
 
 @SpringBootTest
-@RequiredArgsConstructor
-public class MemberRepository {
+@Log4j2
+public class MemberRepositoryTests {
 
-    private final MemberRepository memberRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Test
     public void testInsert(){
-        IntStream.rangeClosed(1,100).forEach(i -> {
-            Member member = Member.builder()
-                    .build();
-        });
+
+        Member member = Member.builder()
+                .name("안상영")
+                .memberId("aidencjswo")
+                .memberPw("1234")
+                .build();
+
+        Member result = memberRepository.save(member);
     }
 }
