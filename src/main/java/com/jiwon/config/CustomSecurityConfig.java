@@ -2,6 +2,7 @@ package com.jiwon.config;
 
 import com.jiwon.security.MemberDetailService;
 import com.jiwon.security.filter.MemberLoginFilter;
+import com.jiwon.security.handler.MemberLoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -56,11 +57,16 @@ public class CustomSecurityConfig {
         //반드시 필요
         http.authenticationManager(authenticationManager);
 
-        //APILoginFilter
+        //MemberLoginFilter
         MemberLoginFilter memberLoginFilter = new MemberLoginFilter("/generateToken");
         memberLoginFilter.setAuthenticationManager(authenticationManager);
 
-        //APILoginFilter의 위치조정
+        //MemberLoginSuccessHandler
+        MemberLoginSuccessHandler successHandler = new MemberLoginSuccessHandler();
+        //SuccessHandler 세팅
+        memberLoginFilter.setAuthenticationSuccessHandler(successHandler);
+
+        //MemberLoginFilter의 위치조정
         http.addFilterBefore(memberLoginFilter, UsernamePasswordAuthenticationFilter.class);
 
 
