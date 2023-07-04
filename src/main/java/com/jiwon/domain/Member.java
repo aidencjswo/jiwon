@@ -30,6 +30,4 @@ public class Member extends BaseEntity{
     private String salt;
     @Column(length = 50 , nullable = false)
     private String name;
-
-    private boolean social;
 }
