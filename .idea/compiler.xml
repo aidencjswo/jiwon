@@ -12,7 +12,7 @@
         <module name="jiwon.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11">
       <module name="com.jiwon.jiwon" target="11" />
       <module name="com.jiwon.jiwon.main" target="11" />
       <module name="com.jiwon.jiwon.test" target="11" />

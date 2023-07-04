@@ -2,13 +2,11 @@ package com.jiwon.repository;
 
 
 import com.jiwon.domain.Member;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
