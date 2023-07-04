@@ -26,7 +26,6 @@ public class MemberRepositoryTests {
     public void testInsert(){
 
         Member member = Member.builder()
-                .social(false)
                 .name("썬칩")
                 .memberId("aidencjswo5")
                 .memberPw(passwordEncoder.encode("1234"))
