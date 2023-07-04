@@ -1,6 +1,7 @@
 package com.jiwon.security.handler;
 
 import com.google.gson.Gson;
+import com.jiwon.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;

@@ -62,9 +62,9 @@ public class CustomSecurityConfig {
         memberLoginFilter.setAuthenticationManager(authenticationManager);
 
         //MemberLoginSuccessHandler
-        MemberLoginSuccessHandler successHandler = new MemberLoginSuccessHandler();
+        //MemberLoginSuccessHandler successHandler = new MemberLoginSuccessHandler();
         //SuccessHandler 세팅
-        memberLoginFilter.setAuthenticationSuccessHandler(successHandler);
+        //memberLoginFilter.setAuthenticationSuccessHandler(successHandler);
 
         //MemberLoginFilter의 위치조정
         http.addFilterBefore(memberLoginFilter, UsernamePasswordAuthenticationFilter.class);
