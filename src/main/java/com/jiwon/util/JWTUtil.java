@@ -16,7 +16,7 @@ import java.util.Map;
 @Log4j2
 public class JWTUtil {
 
-    @Value("${org.zerock.jwt.secret}")
+    @Value("${com.jiwon.jwt.secret}")
     private String key;
 
     public String generateToken(Map<String, Object> valueMap, int days) {
@@ -48,7 +48,8 @@ public class JWTUtil {
     public Map<String,Object> validateToken(String token)throws JwtException{
         Map<String,Object> claim = null;
 
-        claim = Jwts.parser()
+        //문자열 검증
+        claim = Jwts.parser() 
                 .setSigningKey(key.getBytes()) //Set key
                 .parseClaimsJws(token) // 파싱 및 검증, 실패 시 에러
                 .getBody();
