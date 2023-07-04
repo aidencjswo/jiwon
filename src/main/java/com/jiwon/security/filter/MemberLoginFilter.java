@@ -38,8 +38,8 @@ public class MemberLoginFilter extends AbstractAuthenticationProcessingFilter {
         log.info(jsonData);
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                jsonData.get("mid"),
-                jsonData.get("mpw"));
+                jsonData.get("memberId"),
+                jsonData.get("memberPw"));
 
 
         return getAuthenticationManager().authenticate(authenticationToken);

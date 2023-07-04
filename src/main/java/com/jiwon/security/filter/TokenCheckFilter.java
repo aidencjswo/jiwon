@@ -51,11 +51,11 @@ public class TokenCheckFilter extends OncePerRequestFilter {
             Map<String, Object> payload = validateAccessToken(request);
 
             //mid
-            String mid = (String)payload.get("mid");
+            String memberId = (String)payload.get("memberId");
 
-            log.info("mid: " + mid);
+            log.info("memberId: " + memberId);
 
-            UserDetails userDetails = memberDetailService.loadUserByUsername(mid);
+            UserDetails userDetails = memberDetailService.loadUserByUsername(memberId);
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(

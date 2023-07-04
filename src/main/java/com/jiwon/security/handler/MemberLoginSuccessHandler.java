@@ -29,7 +29,7 @@ public class MemberLoginSuccessHandler implements AuthenticationSuccessHandler {
         log.info(authentication);
         log.info(authentication.getName()); // username
 
-        Map<String, Object> claim = Map.of("mid", authentication.getName());
+        Map<String, Object> claim = Map.of("memberId", authentication.getName());
         //Access Token 유효기간 1일
         String accessToken = jwtUtil.generateToken(claim,1);
         //Refresh TOken 유효기간30일
