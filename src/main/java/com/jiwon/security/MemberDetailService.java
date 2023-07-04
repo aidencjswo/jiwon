@@ -22,11 +22,13 @@ public class MemberDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Member> result = memberRepository.findById(username);
+        Optional<Member> result = memberRepository.getWithRoles(username);
 
-        Member member = result.orElseThrow(() -> new UsernameNotFoundException("Cannot find mid"));
+        if(result.isEmpty()){
+            throw new UsernameNotFoundException("usernmame not found");
+        }
 
-        log.info("APIUserDetailsService apiUser--------------------------");
+        Member member = result.get();
 
         MemberDTO dto = new MemberDTO(
                 member.getMemberId(),

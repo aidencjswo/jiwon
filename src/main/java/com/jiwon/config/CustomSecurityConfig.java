@@ -26,7 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class CustomSecurityConfig {
 
-    private MemberDetailService memberDetailService;
+    private final MemberDetailService memberDetailService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
