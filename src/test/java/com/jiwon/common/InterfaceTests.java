@@ -2,6 +2,7 @@ package com.jiwon.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.jiwon.constants.WeatherEnum;
 import com.mysql.cj.xdevapi.JsonString;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -13,11 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.beans.XMLDecoder;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,21 +32,52 @@ import java.util.Map;
 public class InterfaceTests {
 
     @Autowired
-    private InterfaceUtils interfaceUtils;
+    private InterfaceUtilsImpl interfaceUtilsImpl;
 
     @Test
     void test1() throws IOException {
-        Date date = new Date();
 
-        date.getTime();
+        String[] arr = new String[]{"02","05","08","11","14","17","20","23"};
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime current = LocalDateTime.now();
 
-        String current = sdf.format(date.getTime());
+        DateTimeFormatter dtfDt = DateTimeFormatter.ofPattern("yyyyMMdd");
+        DateTimeFormatter dtfTm = DateTimeFormatter.ofPattern("HH");
 
-        String url = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=DPIuYVy5zN4v0C3P2PBz%2Bter9qkJwZs4J3n7lP0Kaq3%2Bldk306fe9%2FwdDelF%2FxA33%2BLsMkuS48y%2BWiYdArYYaQ%3D%3D&numOfRows=1&pageNo=1&base_date=20230704&base_time=1749&nx=55&ny=127&dataType=JSON";
+        String currentDt = dtfDt.format(current);
+        String currentTm = dtfTm.format(current);
 
-        String result = interfaceUtils.get(url);
+        String inputTm = "";
+
+        for(int i = 0 ; i<arr.length;i++){
+            if(arr[i].equals(currentTm)){
+                inputTm = arr[i];
+            }else if(i==arr.length-1 && !arr[i].equals(currentTm)){
+                for(String s : arr){
+                    if(Integer.parseInt(s)<Integer.parseInt(currentTm)){
+                        inputTm = s;
+                    }else if(currentTm.equals("00") || currentTm.equals("01")){
+                        inputTm = "23";
+                    }
+                }
+            }
+        }
+        inputTm = inputTm.concat("00");
+
+        String url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
+
+        Map<String, String> queryMap = new HashMap<>();
+        queryMap.put("serviceKey","DPIuYVy5zN4v0C3P2PBz%2Bter9qkJwZs4J3n7lP0Kaq3%2Bldk306fe9%2FwdDelF%2FxA33%2BLsMkuS48y%2BWiYdArYYaQ%3D%3D");
+        queryMap.put("numOfRows", "14");
+        queryMap.put("pageNo","1");
+        queryMap.put("base_date",currentDt);
+        queryMap.put("base_time", inputTm);
+        queryMap.put("nx", "59");
+        queryMap.put("ny", "126");
+        queryMap.put("dataType", "JSON");
+
+
+        String result = interfaceUtilsImpl.get(url,queryMap);
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -55,9 +92,10 @@ public class InterfaceTests {
         List<Map<String,Object>> itemList = (List<Map<String, Object>>) itemsMap.get("item");
 
         for(Map<String,Object> m : itemList){
-             for (String s : m.keySet()){
-                 log.info(s+":"+m.get(s));
-             }
+
+            log.info(m.get("fcstDate")+" "+m.get("fcstTime"));
+            log.info(WeatherEnum.getKoreanByLabel(m.get("category").toString().toUpperCase())+":"+m.get("fcstValue"));
+            log.info("----------------------------------------");
         }
     }
 }
