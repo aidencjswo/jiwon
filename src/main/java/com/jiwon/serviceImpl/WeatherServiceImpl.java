@@ -41,4 +41,10 @@ public class WeatherServiceImpl implements WeatherService {
 
         return list;
     }
+
+    @Override
+    public List<String> selectLocationsDeps1() {
+        List<String> list = weatherLocationsRepository.findDistinctDept1();
+        return list;
+    }
 }

@@ -16,9 +16,7 @@ import org.apache.tomcat.util.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,5 +41,20 @@ public class WeatherController {
         return ResponseEntity.ok().body(result);
     }
 
+    @GetMapping("/locations/dept1")
+    public ResponseEntity selectLocationsDept1(){
 
+        List<String> result = weatherService.selectLocationsDeps1();
+
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping("/locations/dept2")
+    public ResponseEntity selectLocationsDept2(
+            @RequestParam("dept1")String dept1
+    ){
+        ResultModel resultModel = new ResultModel();
+        log.info(dept1);
+        return ResponseEntity.ok().body(resultModel);
+    }
 }

@@ -15,4 +15,6 @@ import java.util.List;
 public interface WeatherService {
 
     List<WeatherLocations> selectLocations();
+
+    List<String> selectLocationsDeps1();
 }

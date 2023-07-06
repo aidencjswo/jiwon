@@ -34,4 +34,10 @@ public class WeatherLocationsRepositoryTests {
         list.forEach(weatherLocations -> log.info(weatherLocations));
     }
 
+    @Test
+    void selectDeptLocations(){
+        List<String> list = weatherLocationsRepository.findDistinctDept1();
+
+        log.info(list);
+    }
 }
