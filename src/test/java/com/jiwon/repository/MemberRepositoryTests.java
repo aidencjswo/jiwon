@@ -2,14 +2,11 @@ package com.jiwon.repository;
 
 
 import com.jiwon.domain.Member;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.stream.IntStream;
 
 @SpringBootTest
 @Log4j2
@@ -25,7 +22,6 @@ public class MemberRepositoryTests {
     public void testInsert(){
 
         Member member = Member.builder()
-                .social(false)
                 .name("썬칩")
                 .memberId("aidencjswo5")
                 .memberPw(passwordEncoder.encode("1234"))

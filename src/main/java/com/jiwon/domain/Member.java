@@ -3,6 +3,7 @@ package com.jiwon.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -20,16 +21,16 @@ public class Member extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;
+
     @Column(length = 50 , nullable = false)
     private String memberId;
-    @Column(length = 50 , nullable = false)
+
+    @Column(length = 100 , nullable = false)
     private String memberPw;
-    @Column(length = 30)
+    @Column(length = 30,unique = true)
     private String token;
     @Column(length = 50 , nullable = true)
     private String salt;
     @Column(length = 50 , nullable = false)
     private String name;
-
-    private boolean social;
 }
