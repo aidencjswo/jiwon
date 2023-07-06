@@ -16,7 +16,7 @@ import java.util.Map;
 @Log4j2
 public class JWTUtil {
 
-    @Value("${com.jiwon.jwt.secret}")
+    @Value("${com.jiwon.jwt.secret}")  // yml파일 비밀키 불러오기
     private String key;
 
     public String generateToken(Map<String, Object> valueMap, int days) {

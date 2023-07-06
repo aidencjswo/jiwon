@@ -3,12 +3,12 @@ package com.jiwon.controller;
 
 import com.jiwon.service.SampleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+
+@RestController
 @RequestMapping("/sample")
 @RequiredArgsConstructor
 public class SampleController {
@@ -20,4 +20,6 @@ public class SampleController {
         sampleService.serviceTest();
         return "/test.html";
     }
+
+
 }

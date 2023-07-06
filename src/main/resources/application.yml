@@ -15,6 +15,7 @@ logging:
   level:
     org.springframework: info
 
+#JWT에서 사용할 비밀키
 com:
   jiwon:
     jwt:
