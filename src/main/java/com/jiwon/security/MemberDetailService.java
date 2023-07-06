@@ -22,7 +22,7 @@ public class MemberDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Member> result = memberRepository.getMemberFromId(username);
+        Optional<Member> result = memberRepository.getWithRoles(username);
 
         if(result.isEmpty()){
             throw new UsernameNotFoundException("usernmame not found");
