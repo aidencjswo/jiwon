@@ -35,7 +35,7 @@ public class MemberDetailService implements UserDetailsService {
                 member.getMemberPw(),
                 List.of(new SimpleGrantedAuthority("ROLE_USER")));
         log.info(dto);
-
+        log.info("ok");
         return dto;
     }
 }

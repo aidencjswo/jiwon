@@ -79,7 +79,7 @@ public class CustomSecurityConfig {
         //MemberLoginFilter의 위치조정
         http.addFilterBefore(memberLoginFilter, UsernamePasswordAuthenticationFilter.class);
 
-        //view로 시작하는 모든 경로는 TokenCheckFilter 동작
+        //TokenCheckFilter - view로 시작하는 모든 경로는 TokenCheckFilter 동작
         http.addFilterBefore(
                 tokenCheckFilter(jwtUtil, memberDetailService),
                 UsernamePasswordAuthenticationFilter.class
