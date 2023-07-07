@@ -18,7 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Log4j2
@@ -44,17 +46,42 @@ public class WeatherController {
     @GetMapping("/locations/dept1")
     public ResponseEntity selectLocationsDept1(){
 
-        List<String> result = weatherService.selectLocationsDeps1();
+        List<String> result = weatherService.selectLocationsDept1();
 
         return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/locations/dept2")
     public ResponseEntity selectLocationsDept2(
-            @RequestParam("dept1")String dept1
+            @RequestBody Map<String,String> dept1
     ){
         ResultModel resultModel = new ResultModel();
-        log.info(dept1);
+        log.info(dept1.get("dept1"));
+        resultModel.setData(weatherService.selectLocationsDept2(dept1.get("dept1")));
+        return ResponseEntity.ok().body(resultModel);
+    }
+
+    @PostMapping("locations/dept3")
+    public ResponseEntity selectLocationsDept3(
+            @RequestBody Map<String,String> selectMap
+
+    ){
+        ResultModel resultModel = new ResultModel();
+        log.info(selectMap.get("dept1"));
+        log.info(selectMap.get("dept2"));
+        resultModel.setData(weatherService.selectLocationsDept3(selectMap));
+        return ResponseEntity.ok().body(resultModel);
+    }
+
+    @PostMapping("/show")
+    public ResponseEntity showWeather(
+            @RequestBody Map<String,String> selectMap
+    ) throws IOException {
+        log.info(selectMap.get("dept1"));
+        log.info(selectMap.get("dept2"));
+        log.info(selectMap.get("dept3"));
+        ResultModel resultModel = new ResultModel();
+        resultModel.setData(weatherService.showWeather(selectMap));
         return ResponseEntity.ok().body(resultModel);
     }
 }

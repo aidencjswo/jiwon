@@ -27,8 +27,10 @@ public class WeatherLocations {
     private String dept3;
 
     @Column(length = 100)
-    private int nx;
+    @MapKeyColumn(name = "nx")
+    private String nx;
 
     @Column(length = 100)
-    private int ny;
+    @MapKeyColumn(name = "ny")
+    private String ny;
 }
