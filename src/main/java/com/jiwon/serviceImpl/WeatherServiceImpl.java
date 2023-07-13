@@ -98,7 +98,10 @@ public class WeatherServiceImpl implements WeatherService {
                     if(Integer.parseInt(s)<Integer.parseInt(currentTm)){
                         inputTm = s;
                     }else if(currentTm.equals("00") || currentTm.equals("01")){
+                        current = current.minusDays(1);
+                        currentDt = dtfDt.format(current);
                         inputTm = "23";
+                        break;
                     }
                 }
             }
@@ -109,13 +112,13 @@ public class WeatherServiceImpl implements WeatherService {
 
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("serviceKey","DPIuYVy5zN4v0C3P2PBz%2Bter9qkJwZs4J3n7lP0Kaq3%2Bldk306fe9%2FwdDelF%2FxA33%2BLsMkuS48y%2BWiYdArYYaQ%3D%3D");
-        queryMap.put("numOfRows", "14");
+        queryMap.put("numOfRows", "12");
         queryMap.put("pageNo","1");
         queryMap.put("base_date",currentDt);
         queryMap.put("base_time", inputTm);
         queryMap.put("nx", nxNyMap.get("nx"));
         queryMap.put("ny", nxNyMap.get("ny"));
-        queryMap.put("dataType", "JSON");
+        queryMap.put("dataType", "json");
 
 
         String result = interfaceUtilsImpl.get(url,queryMap);
@@ -134,14 +137,20 @@ public class WeatherServiceImpl implements WeatherService {
 
         List<String> resultList = new ArrayList<>();
 
-        resultList.add(itemList.get(0).get("fcstDate") + "" + itemList.get(0).get("fcstTime"));
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시mm분");
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+
+        String temp = itemList.get(0).get("baseDate")+""+itemList.get(0).get("baseTime");
+        LocalDateTime ldt = LocalDateTime.parse(temp, dtf2);
+        resultList.add("-----------------------------------------");
+        resultList.add(selectMap.get("dept1")+" "+selectMap.get("dept2")+" "+selectMap.get("dept3"));
+        resultList.add("-----------------------------------------");
+        resultList.add(dtf1.format(ldt));
+        resultList.add("-----------------------------------------");
 
         for(Map<String,Object> m : itemList){
-
             resultList.add(WeatherEnum.getKoreanByLabel(m.get("category").toString().toUpperCase())+":"+m.get("fcstValue"));
-            log.info(m.get("fcstDate")+" "+m.get("fcstTime"));
-            log.info(WeatherEnum.getKoreanByLabel(m.get("category").toString().toUpperCase())+":"+m.get("fcstValue"));
-            log.info("----------------------------------------");
+            resultList.add("-----------------------------------------");
         }
 
         return resultList;
