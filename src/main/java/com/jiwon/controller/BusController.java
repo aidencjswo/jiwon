@@ -24,7 +24,7 @@ public class BusController {
     private final InterfaceUtilsImpl interfaceUtils;
     private final BusService busService;
 
-    @PostMapping(value = "/bus")
+    @PostMapping("/bus")
     public ResponseEntity searchRouteId(
             @RequestBody Map<String,String> selectMap
     ){
