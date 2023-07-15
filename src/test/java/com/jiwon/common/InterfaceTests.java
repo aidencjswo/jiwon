@@ -1,7 +1,6 @@
 package com.jiwon.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.jiwon.constants.WeatherEnum;
 import com.mysql.cj.xdevapi.JsonString;
 import lombok.RequiredArgsConstructor;
