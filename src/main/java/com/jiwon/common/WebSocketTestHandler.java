@@ -27,29 +27,31 @@ public class WebSocketTestHandler extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         // 클라이언트로부터 메시지 수신
         String clientMessage = message.getPayload();
-        System.out.println("클라이언트로부터 메시지 수신: " + clientMessage);
 
         inputText = clientMessage;
-
         // 서버에서 클라이언트로 메시지 전송
         String serverMessage = inputText;
 
-        sessionList.forEach(webSocketSession -> System.out.println("webSocketSession = " + webSocketSession));
-
-        session.sendMessage(new TextMessage(serverMessage));
-        System.out.println("서버에서 클라이언트로 메시지 전송: " + serverMessage);
+        for (WebSocketSession s : sessionList) {
+            if (!session.getId().equals(s.getId())) {
+                try {
+                    s.sendMessage(new TextMessage(serverMessage));
+                } catch (IOException e) {
+                    System.out.println("메시지 전송 실패: " + e.getMessage());
+                }
+            }
+        }
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("연결됨 = " + session);
         sessionList.add(session);
-        System.out.println("sessionList = " + sessionList);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         System.out.println("연결끊어짐");
+        sessionList.remove(session);
 
     }
 }
