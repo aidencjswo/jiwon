@@ -20,12 +20,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Data
 @Log4j2
+@RequestMapping("/bus")
 public class BusController {
     private final InterfaceUtilsImpl interfaceUtils;
     private final BusService busService;
 
-    @PostMapping("/bus")
-    public ResponseEntity searchRouteId(
+    @PostMapping("/routeId")
+    public ResponseEntity searchRouteIdByRoute(
             @RequestBody Map<String,String> selectMap
     ){
         ResultModel resultModel = new ResultModel();
@@ -37,5 +38,15 @@ public class BusController {
         resultModel.setData(routeId);
 
         return ResponseEntity.ok().body(routeId);
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity searchInfoByRouteId(){
+        ResultModel resultModel = new ResultModel();
+
+
+
+
+        return ResponseEntity.ok().body("result");
     }
 }
