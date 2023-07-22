@@ -16,6 +16,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketTestHandler, "/socket").setAllowedOrigins("http://localhost:3000","http://121.131.135.84:3000","http://aidengenius.iptime.org:3000");
+        registry.addHandler(webSocketTestHandler, "/socket")
+                .setAllowedOrigins("http://localhost:3000","http://121.131.135.84:3000","http://aidengenius.iptime.org:3000");
     }
 }

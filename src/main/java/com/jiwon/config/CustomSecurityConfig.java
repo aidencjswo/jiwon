@@ -68,7 +68,7 @@ public class CustomSecurityConfig {
         http.authenticationManager(authenticationManager);
 
         //MemberLoginFilter
-        MemberLoginFilter memberLoginFilter = new MemberLoginFilter("/generateToken");
+        MemberLoginFilter memberLoginFilter = new MemberLoginFilter("/login");
         memberLoginFilter.setAuthenticationManager(authenticationManager);
 
         //MemberLoginSuccessHandler
