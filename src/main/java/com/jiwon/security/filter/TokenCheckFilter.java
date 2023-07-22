@@ -34,17 +34,14 @@ public class TokenCheckFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
 
 
-        if (!path.startsWith("/view/")) {
+        if (path.startsWith("/member/")) {
             filterChain.doFilter(request, response);
+            log.info("/view/가 아닌경우");
             return;
         }
 
         log.info("Token Check Filter..........................");
         log.info("JWTUtil: " + jwtUtil);
-
-        filterChain.doFilter(request,response);
-
-
 
         try{
 

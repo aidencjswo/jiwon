@@ -27,17 +27,19 @@ public class BusController {
 
     @PostMapping("/routeId")
     public ResponseEntity searchRouteIdByRoute(
-            @RequestBody Map<String,String> selectMap
+            @RequestBody(required = false) Map<String,Object> selectMap
     ){
         ResultModel resultModel = new ResultModel();
 
         log.info(selectMap.get("route"));
 
-        String routeId = busService.searchRouteId(selectMap.get("route"));
+        String route = selectMap.get("route").toString();
+
+        String routeId = busService.searchRouteId(route);
 
         resultModel.setData(routeId);
 
-        return ResponseEntity.ok().body(routeId);
+        return ResponseEntity.ok().body(resultModel);
     }
 
     @GetMapping("/info")
