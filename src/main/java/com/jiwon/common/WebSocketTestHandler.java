@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@ServerEndpoint("/socket")
 @CrossOrigin
+@ServerEndpoint("/socket")
 public class WebSocketTestHandler extends TextWebSocketHandler {
 
     private String inputText;

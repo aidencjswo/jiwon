@@ -26,8 +26,8 @@ public class MemberLoginSuccessHandler implements AuthenticationSuccessHandler {
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
-        log.info(authentication);
-        log.info(authentication.getName()); // username
+        log.info("authentication"+authentication);
+        log.info("authentication.getName()"+authentication.getName()); // username
 
         Map<String, Object> claim = Map.of("memberId", authentication.getName());
         //Access Token 유효기간 1일
